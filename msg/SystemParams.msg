@@ -1,0 +1,3 @@
+float64 spring_constant
+float64 damper_constant
+float64 equil_spring_length

@@ -1,0 +1,2 @@
+geometry_msgs/Point obj1final
+geometry_msgs/Point obj2final
