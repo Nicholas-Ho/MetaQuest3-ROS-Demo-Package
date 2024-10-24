@@ -19,8 +19,10 @@ int main(int argc, char **argv)
   ros::Publisher pub = n.advertise<spring_boxes::SpringSystemState>("spring_system_state", 1000);
 
   ros::Rate loop_rate(FREQUENCY);  // Hz
-  float timeDelta = 1 / FREQUENCY;
+  float timeDelta = 1 / (float)FREQUENCY;
+  ROS_INFO("Period: %fs", timeDelta);
 
+  ROS_INFO("Node is running");
 
   while (ros::ok())
   {
@@ -36,8 +38,8 @@ int main(int argc, char **argv)
       // Semi-explicit Euler: update velocity then displacement
       solver1.step_velocity(obj2Pos, obj2Vel, timeDelta);
       solver2.step_velocity(obj1Pos, obj2Vel, timeDelta);
-      msg.obj1final = solver1.step_displacement(timeDelta).to_point_msg();
-      msg.obj2final = solver2.step_displacement(timeDelta).to_point_msg();
+      msg.obj1position = solver1.step_displacement(timeDelta).to_point_msg();
+      msg.obj2position = solver2.step_displacement(timeDelta).to_point_msg();
 
       // Publish state
       pub.publish(msg);

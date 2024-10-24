@@ -6,10 +6,10 @@
 
 class SystemHandler {
   private:
-    OdeSolver solver1, solver2;
+    OdeSolver &solver1, &solver2;
     bool initialised = false;
   public:
-    SystemHandler(OdeSolver s1, OdeSolver s2);
+    SystemHandler(OdeSolver &s1, OdeSolver &s2);
     void unity_update_callback(const spring_boxes::UnityUpdate::ConstPtr& msg);
     bool is_initialised();
 };

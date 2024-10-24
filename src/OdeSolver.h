@@ -7,7 +7,7 @@ class OdeSolver {
   private:
     float x, y, z;
     float vx, vy, vz;
-    float step_status = false;  // only step if true
+    bool step_status = false;  // only step if true
     float k;  // spring constant
     float c;  // damper constant
     float L;  // equilibrium spring length

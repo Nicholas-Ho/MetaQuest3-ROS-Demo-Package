@@ -3,7 +3,7 @@
 #include "OdeSolver.h"
 #include "spring_boxes/UnityUpdate.h"
 
-SystemHandler::SystemHandler(OdeSolver s1, OdeSolver s2) : solver1(s1), solver2(s2) {}
+SystemHandler::SystemHandler(OdeSolver &s1, OdeSolver &s2) : solver1(s1), solver2(s2) {}
 
 void SystemHandler::unity_update_callback(const spring_boxes::UnityUpdate::ConstPtr& msg) {
     switch(msg->simState) {
@@ -20,6 +20,7 @@ void SystemHandler::unity_update_callback(const spring_boxes::UnityUpdate::Const
                             msg->systemParams.equil_spring_length,
                             msg->box2data.mass);
         initialised = true;
+        ROS_INFO("System is initialised.");
         break;
 
     case 1:
@@ -39,16 +40,17 @@ void SystemHandler::unity_update_callback(const spring_boxes::UnityUpdate::Const
         solver1.set_step_status(msg->box1data.update);
         solver2.set_step_status(msg->box2data.update);
         if (!msg->box1data.update) {
-        solver1.silent_update(vector3d(msg->box1data.position), msg->timeDelta);
+            solver1.silent_update(vector3d(msg->box1data.position), msg->timeDelta);
         }
         if (!msg->box2data.update) {
-        solver2.silent_update(vector3d(msg->box2data.position), msg->timeDelta);
+            solver2.silent_update(vector3d(msg->box2data.position), msg->timeDelta);
         }
         break;
 
     case 2:
         // Terminating
         initialised = false;
+        ROS_INFO("System terminated.");
         break;
 
     default:

@@ -1,5 +1,6 @@
 #include "OdeSolver.h"
 #include "vector3d.h"
+#include "ros/ros.h"
 
 
 void OdeSolver::initialise(vector3d vec,
@@ -34,9 +35,9 @@ void OdeSolver::step_velocity(vector3d attachedPos,
 
 vector3d OdeSolver::step_displacement(float timeDelta) {
     if (step_status) {  // Only continue if (step_status == true)
-    x = x + vx * timeDelta;
-    y = y + vy * timeDelta;
-    z = z + vz * timeDelta;
+        x = x + vx * timeDelta;
+        y = y + vy * timeDelta;
+        z = z + vz * timeDelta;
     }
     return get_displacement();
 }
