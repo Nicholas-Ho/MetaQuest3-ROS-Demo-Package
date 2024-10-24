@@ -10,14 +10,14 @@ void SystemHandler::unity_update_callback(const spring_boxes::UnityUpdate::Const
     case 0:
         // Initialise
         solver1.initialise(vector3d(msg->box1data.position),
-                            msg->params.spring_constant,
-                            msg->params.damper_constant,
-                            msg->params.equil_spring_length,
+                            msg->systemParams.spring_constant,
+                            msg->systemParams.damper_constant,
+                            msg->systemParams.equil_spring_length,
                             msg->box1data.mass);
         solver2.initialise(vector3d(msg->box2data.position),
-                            msg->params.spring_constant,
-                            msg->params.damper_constant,
-                            msg->params.equil_spring_length,
+                            msg->systemParams.spring_constant,
+                            msg->systemParams.damper_constant,
+                            msg->systemParams.equil_spring_length,
                             msg->box2data.mass);
         initialised = true;
         break;
@@ -26,13 +26,13 @@ void SystemHandler::unity_update_callback(const spring_boxes::UnityUpdate::Const
         // Running
 
         // Set system parameters
-        solver1.set_params(msg->params.spring_constant,
-                            msg->params.damper_constant,
-                            msg->params.equil_spring_length,
+        solver1.set_params(msg->systemParams.spring_constant,
+                            msg->systemParams.damper_constant,
+                            msg->systemParams.equil_spring_length,
                             msg->box1data.mass);
-        solver2.set_params(msg->params.spring_constant,
-                            msg->params.damper_constant,
-                            msg->params.equil_spring_length,
+        solver2.set_params(msg->systemParams.spring_constant,
+                            msg->systemParams.damper_constant,
+                            msg->systemParams.equil_spring_length,
                             msg->box2data.mass);
 
         // If the box is grabbed (BoxData.update == false), silet update only

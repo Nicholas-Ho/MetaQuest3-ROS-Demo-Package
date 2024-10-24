@@ -1,5 +1,5 @@
 int32 simState
 spring_boxes/BoxData box1data
 spring_boxes/BoxData box2data
-spring_boxes/SystemParams params
+spring_boxes/SystemParams systemParams
 float64 timeDelta
