@@ -8,10 +8,10 @@ vector3d::vector3d(geometry_msgs::Point msg) : x(msg.x), y(msg.y), z(msg.z) {}
 
 geometry_msgs::Point vector3d::to_point_msg() {
 geometry_msgs::Point point = geometry_msgs::Point();
-point.x = x;
-point.y = y;
-point.z = z;
-return point;
+  point.x = x;
+  point.y = y;
+  point.z = z;
+  return point;
 }
 
 float vector3d::magnitude() { return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2)); }
