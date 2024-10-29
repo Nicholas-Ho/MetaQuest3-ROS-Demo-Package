@@ -49,10 +49,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  BoxData.msg
-  SystemParams.msg
+  UnityObjData.msg
   UnityUpdate.msg
-  SpringSystemState.msg
+  SystemParams.msg
+  ObjectState.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -135,8 +135,8 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(${PROJECT_NAME}_simulator
-  src/spring_system_simulator_node.cpp
+add_executable(box_simulator_node
+  src/box_simulator_node.cpp
   src/vector3d.h
   src/vector3d.cpp
   src/OdeSolver.h
@@ -153,10 +153,10 @@ add_executable(${PROJECT_NAME}_simulator
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-add_dependencies(${PROJECT_NAME}_simulator ${PROJECT_NAME}_gencpp)
+add_dependencies(box_simulator_node ${PROJECT_NAME}_gencpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME}_simulator ${catkin_LIBRARIES})
+target_link_libraries(box_simulator_node ${catkin_LIBRARIES})
 
 #############
 ## Install ##

@@ -1,5 +1,4 @@
 int32 simState
-spring_boxes/BoxData box1data
-spring_boxes/BoxData box2data
+spring_boxes/UnityObjData[2] objDataList
 spring_boxes/SystemParams systemParams
 float64 timeDelta
