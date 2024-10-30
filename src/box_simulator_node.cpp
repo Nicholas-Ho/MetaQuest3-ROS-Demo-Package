@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 
   // Initialise key classes
   ROS_INFO("Starting node with ID: %s", node_id.c_str());
-  SystemHandler systemHandler = SystemHandler(node_id);  // ID to override
+  SystemHandler systemHandler = SystemHandler(node_id);
 
   // Register subscribers and publishers
   ros::Subscriber unity_sub = n.subscribe("/unity_updates", 1000, &SystemHandler::unity_update_callback, &systemHandler);
