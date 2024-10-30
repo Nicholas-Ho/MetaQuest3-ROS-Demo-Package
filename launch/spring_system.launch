@@ -1,15 +1,17 @@
 <launch>
     <!-- Launch object simulation nodes  -->
     <group ns="box1">
-        <node pkg="spring_boxes" name="box_sim" type="box_simulator_node"/>
+        <node pkg="spring_boxes" name="box_sim" type="box_simulator_node" output="screen">
             <param name="node_id" type="string" value="box1"/>
-            <remap from="box_state_self" to="box1/box_state"/>
-            <remap from="box_state_attached" to="box2/box_state"/>
+            <remap from="box_state_self" to="box_state"/>
+            <remap from="box_state_attached" to="/box2/box_state"/>
+        </node>
     </group>
     <group ns="box2">
-        <node pkg="spring_boxes" name="box_sim" type="box_simulator_node"/>
+        <node pkg="spring_boxes" name="box_sim" type="box_simulator_node" output="screen">
             <param name="node_id" type="string" value="box2"/>
-            <remap from="box_state_self" to="box2/box_state"/>
-            <remap from="box_state_attached" to="box1/box_state"/>
+            <remap from="box_state_self" to="box_state"/>
+            <remap from="box_state_attached" to="/box1/box_state"/>
+        </node>
     </group>
 </launch>

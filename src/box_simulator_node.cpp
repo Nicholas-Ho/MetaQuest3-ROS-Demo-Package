@@ -18,10 +18,11 @@ int main(int argc, char **argv)
   n.getParam("node_id", node_id);
 
   // Initialise key classes
-  SystemHandler systemHandler = SystemHandler(argv[1]);  // ID to override
+  ROS_INFO("Starting node with ID: %s", node_id.c_str());
+  SystemHandler systemHandler = SystemHandler(node_id);  // ID to override
 
   // Register subscribers and publishers
-  ros::Subscriber unity_sub = n.subscribe("unity_updates", 1000, &SystemHandler::unity_update_callback, &systemHandler);
+  ros::Subscriber unity_sub = n.subscribe("/unity_updates", 1000, &SystemHandler::unity_update_callback, &systemHandler);
   ros::Subscriber connected_sub = n.subscribe("box_state_attached", 1000, &SystemHandler::sim_update_callback, &systemHandler);  // Topic to override
   ros::Publisher pub = n.advertise<spring_boxes::ObjectState>("box_state_self", 1000);  // Topic to override
 

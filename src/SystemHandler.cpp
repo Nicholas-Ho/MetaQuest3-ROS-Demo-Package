@@ -107,6 +107,7 @@ void SystemHandler::step_solver(float timeDelta) {
 
 spring_boxes::ObjectState SystemHandler::generate_object_state_msg() {
     spring_boxes::ObjectState msg;
+    msg.id = id;
     msg.position = solver.get_displacement().to_point_msg();
     msg.velocity = solver.get_velocity().to_vec3_msg();
     return msg;
