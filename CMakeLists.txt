@@ -47,17 +47,19 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
-
-# Generate services in the 'srv' folder
-add_service_files(
+add_message_files(
   FILES
-  SpringOdeSolver.srv
+  UnityObjData.msg
+  UnityUpdate.msg
+  SystemParams.msg
+  ObjectState.msg
 )
+
+## Generate services in the 'srv' folder
+# add_service_files(
+#   FILES
+#   SpringOdeSolver.srv
+# )
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -116,6 +118,7 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -132,9 +135,15 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(${PROJECT_NAME}_publisher src/test_talker.cpp)
-add_executable(${PROJECT_NAME}_subscriber src/position_sub.cpp)
-add_executable(${PROJECT_NAME}_ode_solver src/spring_ode_srv_server.cpp)
+add_executable(box_simulator_node
+  src/box_simulator_node.cpp
+  src/vector3d.h
+  src/vector3d.cpp
+  src/OdeSolver.h
+  src/OdeSolver.cpp
+  src/SystemHandler.h
+  src/SystemHandler.cpp
+)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -144,14 +153,10 @@ add_executable(${PROJECT_NAME}_ode_solver src/spring_ode_srv_server.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-add_dependencies(${PROJECT_NAME}_publisher ${PROJECT_NAME}_generate_messages_cpp)
-add_dependencies(${PROJECT_NAME}_subscriber ${PROJECT_NAME}_generate_messages_cpp)
-add_dependencies(${PROJECT_NAME}_ode_solver ${PROJECT_NAME}_gencpp)
+add_dependencies(box_simulator_node ${PROJECT_NAME}_gencpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME}_publisher ${catkin_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}_subscriber ${catkin_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}_ode_solver ${catkin_LIBRARIES})
+target_link_libraries(box_simulator_node ${catkin_LIBRARIES})
 
 #############
 ## Install ##
