@@ -1,5 +1,8 @@
 <launch>
     <!-- Launch object simulation nodes  -->
+    <include file="$(find ros_tcp_endpoint)/launch/endpoint.launch">
+        <arg name="tcp_ip" value="0.0.0.0" />
+    </include>
     <group ns="box1">
         <node pkg="spring_boxes" name="box_sim" type="box_simulator_node" output="screen">
             <param name="node_id" type="string" value="box1"/>
